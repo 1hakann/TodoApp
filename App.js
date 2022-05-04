@@ -23,17 +23,17 @@ export default function App() {
         <View style={styles.taskWrapper}>
             <Text style={styles.sectionTitle}>Today's Task(s)</Text>
             <View style={styles.item}>
-              <ScrollView alwaysBounceVertical={false}>
-              {
-                taskItem.map((item, index) => {
-                  return ( 
-                  <TouchableOpacity key={index} onPress={() => completeTask(index)} >
-                    <Task text={item} />
+              <FlatList alwaysBounceVertical={false} 
+              data={taskItem}
+              keyExtractor={(item,index) => index.toString()}
+              renderItem={(itemData) => {                   
+                return ( 
+                  <TouchableOpacity onPress={() => completeTask(itemData.item)} >
+                    <Task text={itemData.item} />
                   </TouchableOpacity>
                   )
-                })
-              }
-              </ScrollView>
+              }} >
+              </FlatList>
             </View>
         </View>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? "padding" : "height"} style={styles.writeTaskWrapper}>
