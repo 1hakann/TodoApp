@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, Platform, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, Platform, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { Keyboard } from 'react-native-web';
 import Task from './components/Task';
 
@@ -23,6 +23,7 @@ export default function App() {
         <View style={styles.taskWrapper}>
             <Text style={styles.sectionTitle}>Today's Task(s)</Text>
             <View style={styles.item}>
+              <ScrollView alwaysBounceVertical={false}>
               {
                 taskItem.map((item, index) => {
                   return ( 
@@ -32,6 +33,7 @@ export default function App() {
                   )
                 })
               }
+              </ScrollView>
             </View>
         </View>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? "padding" : "height"} style={styles.writeTaskWrapper}>
